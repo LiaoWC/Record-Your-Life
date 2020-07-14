@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--    <script src="../static/js/typeahead/dist/typeahead.jquery.js"></script>-->
+    <script src="{{url_for('static', filename='js/typeahead/dist/typeahead.jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/typeahead/dist/typeahead.bundle.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{url_for('static', filename='js/block_form.js')}}"></script>
+    <title>Record Your Life</title>
+</head>
+<body>
+
+<header>
+    <div class='container'>
+        <nav id="nav_bar" class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Record Your Life</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+</header>
+<section id='intro'>
+    <div class="jumbotron">
+        <h1 class="display-4">Trace back your progress!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+        <!--        <hr class="my-4">-->
+        <!--        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>-->
+        <!--        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+    </div>
+</section>
+
+<section id="record_form">
+    <div class="container">
+        <form>
+
+            <div class="form-group">
+                <label for="nameOfBlock">Title</label>
+                <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?">
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionOfBlock">Description</label>
+                <textarea class="form-control" id="descriptionOfBlock" rows="3"></textarea>
+            </div>
+            <div class="row" id="date_and_tags_and_calendar">
+                <div class="col-md-12" id="tags_and_date">
+                    <div class="form-group  ">
+                        <label for="tagsOfBlock">Tags</label>
+                        <select multiple data-role="tagsinput" id="tagsOfBlock" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="nameOfBlock">Date</label>
+                        <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--">
+                    </div>
+                </div>
+            </div>
+            <div class="container row" id="record_form_btn_container">
+                <button type="button" class="btn btn-outline-secondary" id="record_form_btn">Record</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+<section id="submit_inform">
+    <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
+            <div id="submit_form_msg">
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+    </div>
+</section>
+
+<!--<input type="text"/>-->
+<!--<script>-->
+<!--    /* source: https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ */-->
+<!--    var cities = new Bloodhound({-->
+<!--        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),-->
+<!--        queryTokenizer: Bloodhound.tokenizers.whitespace,-->
+<!--        prefetch: 'assets/cities.json'-->
+<!--    });-->
+<!--    cities.initialize();-->
+
+<!--    var elt = $('input');-->
+<!--    elt.tagsinput({-->
+<!--        itemValue: 'value',-->
+<!--        itemText: 'text',-->
+<!--        typeaheadjs: {-->
+<!--            name: 'cities',-->
+<!--            displayKey: 'text',-->
+<!--            source: cities.ttAdapter()-->
+<!--        }-->
+<!--    });-->
+<!--    elt.tagsinput('add', {"value": 1, "text": "Amsterdam", "continent": "Europe"});-->
+<!--    elt.tagsinput('add', {"value": 4, "text": "Washington", "continent": "America"});-->
+<!--    elt.tagsinput('add', {"value": 7, "text": "Sydney", "continent": "Australia"});-->
+<!--    elt.tagsinput('add', {"value": 10, "text": "Beijing", "continent": "Asia"});-->
+<!--    elt.tagsinput('add', {"value": 13, "text": "Cairo", "continent": "Africa"});-->
+<!--</script>-->
+
+<!--<script src='js/script.js'></script>-->
+</body>
+</html>

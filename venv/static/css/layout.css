@@ -1,0 +1,105 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+p, a, span, li, label {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#nav_bar li {
+    margin-left: 25px;
+}
+
+header div.container {
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+}
+
+div.jumbotron {
+    padding: 3rem 4rem;
+}
+
+table.table-condensed {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #91cbe8;
+}
+
+#record_form div.bootstrap-tagsinput {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: 10px;
+}
+
+#record_form div.bootstrap-tagsinput input {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding-right: 15px;
+}
+
+#record_form div.bootstrap-tagsinput span.tag.label.label-info {
+    border: 1px solid #0088cc;
+    border-radius: .25rem;
+    margin-right: 10px;
+    padding: 0 8px 0 8px;
+    background: #0088cc;
+    color: white;
+}
+
+div.datepicker.datepicker-inline {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+div#tags_and_date.row {
+    padding-bottom: 25px;
+}
+
+div#date_and_tags_and_calendar.container {
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+div#date_and_tags_and_calendar.row button.btn.btn-outline-secondary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+div#date_and_tags_and_calendar.row div.col-md-6 {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+div#record_form_btn_container {
+    /*margin-top: 15px;*/
+}
+
+#record_form_btn_container {
+    position: relative;
+    height: 50px;
+    padding: 0 25px 0 30px;
+}
+
+
+div#record_form_btn_container button {
+    position: absolute;
+    left: 50%;
+    /*top:50%;*/
+    /*transform: translate(-50% -50%);*/
+    transform: translate(-50%);
+}
+
+section#submit_inform {
+    display: none;
+}
+
+section#submit_inform .alert {
+    /*background-color: #d4edda;*/
+    /*border-color: #c3e6cb;*/
+
+}
