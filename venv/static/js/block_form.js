@@ -36,7 +36,7 @@ $(function () {
         $("#submit_form_msg").html(msg);
         // $("#submit_inform").css("display", "block");
         $("#submit_inform").fadeIn("fast");
-        setTimeout(close_submit_inform, 5000);
+        setTimeout(close_submit_inform, 6000);
     }
 
     function submitRecordForm() {
@@ -46,7 +46,7 @@ $(function () {
                 type: "POST",
                 data: {
                     "Title": $("#nameOfBlock").val(),
-                    "Description": $("#descriptionOfBlock").val(),
+                    "DsubmitRecordFormescription": $("#descriptionOfBlock").val(),
                     "Tags": collectTags(),
                     "Date": $("#dateOfBlock").val()
                 },
@@ -73,11 +73,14 @@ $(function () {
                 // }
             }
         )
+        // alert("aaa");
+
     }
 
 
-    $("button.btn-outline-secondary").click(function () {
+    $("#record_form_form").submit(function () {
         submitRecordForm();
-
+        $("#record_form_form").each(function(){ this.reset() });
+        $("div.bootstrap-tagsinput span").remove();
     });
 });

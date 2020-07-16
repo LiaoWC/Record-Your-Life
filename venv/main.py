@@ -7,27 +7,22 @@ from flask import Flask, render_template, request, redirect, session, jsonify
 # http的exception用
 # from werkzeug.exceptions import HTTPException
 
-# postgresql adapter
-import psycopg2
-import pSQL
+import json
 
-connect_str = "dbname='smallfish' user='smallfish' host='localhost' " + "password='smallfish'"
-# use our connection values to establish a connection
-conn = psycopg2.connect(connect_str)
-# create a psycopg2 cursor that can execute queries
-cursor = conn.cursor()
-# create a new table with a single column called "name"
-cursor.execute("select * from blocks;")
-# run a SELECT statement - no data in there, but we can try it
-# cursor.execute("""SELECT * from tutorials""")
-conn.commit()  # <--- makes sure the change is shown in the database
-rows = cursor.fetchall()
+import pSQL, func
 
-for row in rows:
-    print(row)
-
-cursor.close()
-conn.close()
+#
+# db = psycopg2.connect(connect_str)
+# cur = db.cursor()
+# # cur.execute("SELECT * FROM B;")
+# # print(cur.fetchall())
+# print(cur.execute("INSERT INTO b VALUES (%s)", ('166560',)))
+# cur.close()
+# db.commit()
+# db.close()
+# db = pSQL.pSQL()
+# kkk = db.exec("insert into a(ddd) values ('2025-7-7');",0)
+# print(kkk)
 
 app = Flask(__name__)
 
@@ -35,23 +30,29 @@ app = Flask(__name__)
 # home page
 @app.route('/')
 def index():
-    return render_template('index.html')
+    db = pSQL.pSQL()
+    tagsList, blocksList, blockTagPairList = db.home_display()
+    db.close()
+    return render_template('index.html', tagRows=tagsList, blockRows=blocksList, blockTagPairRows=blockTagPairList)
 
 
 # address record_form that users had submited
 @app.route('/submit_record_form', methods=['POST'])
 def submit_record_form():
     if request.method == 'POST':
+        # Take out the data
         title = request.values['Title']
         description = request.values['Description']
         tags = request.values['Tags']
+        func.turn_json_array_string_into_list(tags)
         date = request.values['Date']
-        print(type(title), type(description),type(tags),type(date))
-        print(title,description,tags,date)
-        return jsonify({"msg":1})
+        db = pSQL.pSQL()
+        db.receive_record_submit(title, description, tags, date)
+        db.close()
+        # Put into the database
+        return jsonify({"msg": 1})
     else:
-        return jsonify({"msg":0})
-
+        return jsonify({"msg": 0})
 
 
 # run(這一段要放在程式最後面，不然可能頁面出不來)

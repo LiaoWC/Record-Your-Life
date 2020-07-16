@@ -1,0 +1,108 @@
+#
+connect_str = "dbname='smallfish' user='smallfish' host='localhost' password='smallfish'"
+
+from func import solve_apostrophe, turn_json_array_string_into_list
+
+
+class pSQL:
+    def __init__(self):
+        # postgresql adapter
+        import psycopg2
+        self.conn = psycopg2.connect(connect_str)
+        # create a psycopg2 cursor that can execute queries
+        self.cur = self.conn.cursor()
+
+    # This is disabled because it's not elastic.
+    # # return the result list
+    # def exec(self, sql_query, if_fetch):
+    #     try:
+    #         self.cur.execute(sql_query)
+    #         self.conn.commit()  # <--- makes sure the change is shown in the database
+    #         if if_fetch is not 0:
+    #             rows = self.cur.fetchall()
+    #             for row in rows:
+    #                 print(row)
+    #             return rows
+    #         else:
+    #             empty_res = []
+    #             return empty_res
+    #     except Exception as e:
+    #         empty_res = []
+    #         print(e)
+    #         return empty_res
+    # This is disabled because it's not elastic.
+    # # return the result list
+    # def exec(self, sql_query, if_fetch):
+    #     try:
+    #         self.cur.execute(sql_query)
+    #         self.conn.commit()  # <--- makes sure the change is shown in the database
+    #         if if_fetch is not 0:
+    #             rows = self.cur.fetchall()
+    #             for row in rows:
+    #                 print(row)
+    #             return rows
+    #         else:
+    #             empty_res = []
+    #             return empty_res
+    #     except Exception as e:
+    #         empty_res = []
+    #         print(e)
+    #         return empty_res
+
+    def close(self):
+        self.cur.close()
+        self.conn.close()
+
+    # reutrn err (1 means there's an error.)
+    def receive_record_submit(self, title, description, tags, date):
+        # solve single quote problems
+        title = solve_apostrophe(title)
+        description = solve_apostrophe(description)
+        tagsList = turn_json_array_string_into_list(tags)
+        date = solve_apostrophe(date)
+        # insert into table blocks
+        sql = "INSERT INTO blocks(title,description,last_edited_date) VALUES('%s','%s','%s') RETURNING id;" % (
+            title, description, date)
+        self.cur.execute(sql)
+        self.conn.commit()
+        id_of_new_block = self.cur.fetchone()[0]
+        # dealing with each tag
+        for tag in tagsList:
+            # find if this tag exists
+            sql = "SELECT * FROM tags where name = '%s';" % tag
+            self.cur.execute(sql)
+            self.conn.commit()
+            resTuple = self.cur.fetchone()
+            id_of_new_tag = -1  # declare
+            if resTuple:  # already exists
+                id_of_new_tag = resTuple[0]
+            else:  # not exists
+                # create a tag
+                sql = "INSERT INTO tags(name) VALUES('%s') RETURNING id;" % tag
+                self.cur.execute(sql)
+                self.conn.commit()
+                id_of_new_tag = self.cur.fetchone()[0]
+            # insert into tag_block_pairs
+            sql = "INSERT INTO tag_block_pairs(block_id,tag_id) VALUES(%s,%s);" % (id_of_new_block, id_of_new_tag)
+            self.cur.execute(sql)
+            self.conn.commit()
+
+    # display all the tags and all the blocks in home page
+    # return two lists containing tuples(one row is one tuple): tagsList and blocksList
+    def home_display(self):
+        #
+        sql = "SELECT * FROM tags;"
+        self.cur.execute(sql)
+        self.conn.commit()
+        tagsList = self.cur.fetchall()
+        #
+        sql = "SELECT * FROM blocks;"
+        self.cur.execute(sql)
+        self.conn.commit()
+        blocksList = self.cur.fetchall()
+        #
+        sql = "SELECT * FROM tag_block_pairs;"
+        self.cur.execute(sql)
+        self.conn.commit()
+        blockTagPairList = self.cur.fetchall()
+        return tagsList, blocksList, blockTagPairList

@@ -82,11 +82,11 @@
 
 <section id="record_form">
     <div class="container">
-        <form>
-
+        <form id="record_form_form" onsubmit="return false">
             <div class="form-group">
                 <label for="nameOfBlock">Title</label>
-                <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?">
+                <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?"
+                       required="required">
             </div>
 
             <div class="form-group">
@@ -96,18 +96,20 @@
             <div class="row" id="date_and_tags_and_calendar">
                 <div class="col-md-12" id="tags_and_date">
                     <div class="form-group  ">
-                        <label for="tagsOfBlock">Tags</label>
+                        <label for="tagsOfBlock">Tags(must not type ",")</label>
                         <select multiple data-role="tagsinput" id="tagsOfBlock" class="form-control">
                         </select>
                     </div>
                     <div class="form-group ">
                         <label for="nameOfBlock">Date</label>
-                        <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--">
+                        <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--"
+                               required="required">
                     </div>
                 </div>
             </div>
             <div class="container row" id="record_form_btn_container">
-                <button type="button" class="btn btn-outline-secondary" id="record_form_btn">Record</button>
+                <button type="submit" name="submit" class="btn btn-outline-secondary" id="record_form_btn">Record
+                </button>
             </div>
         </form>
 
@@ -119,14 +121,76 @@
         <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
             <div id="submit_form_msg">
             </div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     </div>
 </section>
-<section>
+<section id="display_tables">
     <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in tagRows: %}
+                    <tr>
+                        <th scope="row">{{row[0]}}</th>
+                        <td>{{row[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">description</th>
+                        <th scope="col">last_edited</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in blockRows: %}
+                    <tr>
+                        <th scope="row">{{row[0]}}</th>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">block_id</th>
+                    <th scope="col">tag_id</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in blockTagPairRows: %}
+                <tr>
+                    <th scope="row">{{row[0]}}</th>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>
 
