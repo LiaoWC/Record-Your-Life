@@ -110,7 +110,7 @@ class pSQL:
     # show blocks info, integrated with tags
     # return: a list containing lists
     # every internal list is one block, containing:
-    # [ Title(str) , description(str) , date(str), tags(list of strings) ]
+    # [ id(int), Title(str), description(str), date(str), tags(list of strings) ]
     def blocks_info(self):
         sql = "SELECT id,title,description,last_edited_date FROM blocks;"
         self.cur.execute(sql)
@@ -119,7 +119,7 @@ class pSQL:
         outer_list = []
         for row_of_blocks in blocks_list:
             # place title, description, date in the internal_list
-            internal_list = [row_of_blocks[1], row_of_blocks[2], row_of_blocks[3]]
+            internal_list = [row_of_blocks[0], row_of_blocks[1], row_of_blocks[2], row_of_blocks[3]]
             block_id = row_of_blocks[0]
             # finding tags and place it in the list
             sql = "SELECT tags.name FROM tags,tag_block_pairs tbp WHERE tbp.block_id = %s and tags.id = tbp.tag_id;" % block_id
@@ -133,3 +133,12 @@ class pSQL:
             # put it in the outer_list
             outer_list.append(internal_list)
         return outer_list
+
+    def delete_block(self, block_id):
+        block_id = int(block_id)
+        sql = "DELETE FROM tag_block_pairs t WHERE t.block_id = %s;" % block_id
+        self.cur.execute(sql)
+        self.conn.commit()
+        sql = "DELETE FROM blocks WHERE blocks.id = %s;" % block_id
+        self.cur.execute(sql)
+        self.conn.commit()

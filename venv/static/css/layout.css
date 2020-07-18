@@ -109,7 +109,11 @@ section#show_blocks_section .blocks_info_tags {
 }
 
 section#show_blocks_section .blocks_info_tags_signs {
-    color: #007bff
+    color: #007bff;
+}
+
+section#show_blocks_section .blocks_info_date_signs {
+    color: #3A7734;
 }
 
 div#show_blocks_btn_container {
@@ -119,4 +123,9 @@ div#show_blocks_btn_container {
 section#show_blocks_section {
     padding-top: 15px;
     padding-bottom: 20px;
+}
+
+button.need_confirm_delete {
+    background-color: white;
+    color: #bd2130;
 }

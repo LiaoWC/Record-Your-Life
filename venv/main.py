@@ -68,6 +68,16 @@ def show_blocks():
     db.close()
     # return it to the frontend\
     return json.dumps(reslist, default=func.date_to_string_converter)
+    # P.S. id will be inserted into the delete-block-btn tags as a title attr
+
+
+@app.route('/delete_block', methods=['POST'])
+def delete_block():
+    if request.method == 'POST':
+        block_id = request.values['block_id']
+        db = pSQL.pSQL()
+        db.delete_block(block_id)
+        return jsonify({"msg": 1})
 
 
 # run(這一段要放在程式最後面，不然可能頁面出不來)

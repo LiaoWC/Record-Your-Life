@@ -1,11 +1,11 @@
 $(function () {
-    $('#datepicker').datepicker();
-    $('#datepicker').on('changeDate', function () {
-        $('#my_hidden_input').val(
-            $('#datepicker').datepicker('getFormattedDate')
-        );
-
-    });
+    // $('#datepicker').datepicker();
+    // $('#datepicker').on('changeDate', function () {
+    //     $('#my_hidden_input').val(
+    //         $('#datepicker').datepicker('getFormattedDate')
+    //     );
+    //
+    // });
 
     function collectTags() {
         let tag_arr = [];
@@ -79,46 +79,101 @@ $(function () {
     });
 
     ///////////////////// showing blocks ///////////////////////////////////
-    $("#btn_show_blocks").click(function () {
+    function getShowBlocksDataHtmlStr() {
+        let htmlStr = "";
         $.getJSON('/show_blocks', "", function (data) {
-            let htmlStr = "";
             let num = 0; // from 0
             for (block of data) {
                 num++;
-                let title = block[0];
-                let description = block[1];
-                let date = block[2];
-                let tags = block[3];
-                let tagsArr = [];
-                // console.log(typeof title);
-                // console.log(typeof description);
-                // console.log(typeof date);
-                // console.log(typeof tags);
-                // console.log(typeof tagsArr);
-                // console.log(typeof data);
+                let block_id = block[0];
+                let title = block[1];
+                let description = block[2];
+                let date = block[3];
+                let tags = block[4];
+                // let tagsArr = [];
                 /* make html string */
-                htmlStr += "<div class=\"card\">\n<div class=\"card-header\" id=\"heading" + String(num) + "\">"
-                    + "<h2 class=\"mb-0\">\n" + "<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" "
-                    + "data-target=\"#collapse" + num + "\" aria-expanded=\"true\" aria-controls=\"collapse" + num + "\">"
-                    + title + "&nbsp;" + "&nbsp;";
+                htmlStr +=
+                    "<div class=\"card\" id=\"show_blocks_card_" + num + "\">\n" +
+                    "    <div class=\"card-header\" id=\"heading" + String(num) + "\">" +
+                    "        <h2 class=\"mb-0\">\n" +
+                    "            <button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" " +
+                    "                data-target=\"#collapse" + num + "\" aria-expanded=\"true\" aria-controls=\"collapse" + num + "\">" +
+                    `${title} &nbsp; &nbsp; &nbsp; <a class='blocks_info_date_signs'>${date}</a>`;
                 for (let tag of tags) {
-                    htmlStr += "&nbsp;" + "<a class=\"blocks_info_tags_signs\">" + "(</a>" + "<a class=\"blocks_info_tags\">#" + tag + "</a><a class=\"blocks_info_tags_signs\">)</a>";
+                    htmlStr += `&nbsp; <a class=\"blocks_info_tags_signs\">(</a><a class=\"blocks_info_tags\">#${tag}</a><a class=\"blocks_info_tags_signs\">)</a>`;
                 }
                 htmlStr += "</button>\n</h2>\n</div>\n"
                     + "<div id=\"collapse" + num + "\" class=\"collapse\" aria-labelledby=\"heading" + num + "\" "
                     + "data-parent=\"#show_blocks_section_accordion\">"
                     + "<div class=\"card-body\">\n";
                 if (description) {
-                    htmlStr += description;
+                    htmlStr += "<div class='container'><p>" + description + "</p></div>";
                 } else {
                     htmlStr += "No description.";
                 }
-                htmlStr += "\n</div>\n</div>\n</div>";
-                console.log(description)
+                htmlStr += "<div class='container text-right'><button type=\"button\" title='" + block_id + "' class=\"btn btn-danger need_confirm_delete\" id='block_delete_btn_" + num + "'>Delete</button>\n"
+                htmlStr += "\n</div>\n</div>\n</iv>\n</div>";
             }
             $("#show_blocks_section_accordion").html(htmlStr);
+            /* start to listen to deleting buttons */
+            $("button.need_confirm_delete").click(function () {
+                if (confirm_delete()) {
+                    let block_id = $(this).attr('title');
+                    // let send_data = `{ "block_id" : "${block_id}" }`
+                    // let jjj = JSON.stringify(send_data)
+                    // alert(jjj)
+                    // alert("post=>");
+                    // alert(send_data);
+                    $.post('/delete_block', {block_id: block_id}, function (data) {
+                        let msg = `Delete a block. (Block ID is ${block_id}.)`;
+                        alert(msg);
+                        getShowBlocksDataHtmlStr();
+                    }, "json")
+
+                }
+            });
         });
-        $('.collapse').collapse();
+    }
+
+    $("#btn_show_blocks").click(function () {
+        getShowBlocksDataHtmlStr();
     });
 
+    $("#btn_remove_blocks").click(function () {
+        $("#show_blocks_section_accordion").html("");
+    });
+
+    /* delete button */
+    function confirm_delete() {
+        let msg = 'Confirm deletion?';
+        return (confirm(msg) === true)
+    }
+
+    /////////////// Show tables /////////////////
+    $("#showing_table_headerAndTables_container").hide(); // default: hide
+    let ifShowingTables = 0;
+    $("#btn_show_tables").click(function () {
+        if (ifShowingTables === 1) {
+            $("#showing_table_headerAndTables_container").hide();
+            ifShowingTables = 0;
+        } else {
+            $("#showing_table_headerAndTables_container").show();
+            ifShowingTables = 1;
+        }
+    });
+    //////////////////////
+    // var my_name = 'John';
+    // var jjj = "???"
+    // var s = `hello ${my_name}, how are you doing${jjj}`;
+    // var j = `jjjkkklll
+    // kjkljkljkljkljkljklj`;
+    // alert("j");
+    // alert(j);
+    // console.log(s); // prints hello John, how are you doing
+});
+
+$(document).ready(function () {
+    $("#btn_remove_blocks").click(function () {
+        $('.toast').toast('show');
+    });
 });
