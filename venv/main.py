@@ -8,7 +8,7 @@ from flask import Flask, render_template, request, redirect, session, jsonify
 # from werkzeug.exceptions import HTTPException
 
 import json
-
+import datetime
 import pSQL, func
 
 #
@@ -30,8 +30,11 @@ app = Flask(__name__)
 # home page
 @app.route('/')
 def index():
+    # declare pSQL object
     db = pSQL.pSQL()
+    # show three tables; help us to test the program
     tagsList, blocksList, blockTagPairList = db.home_display()
+    # close the pSQL object
     db.close()
     return render_template('index.html', tagRows=tagsList, blockRows=blocksList, blockTagPairRows=blockTagPairList)
 
@@ -53,6 +56,18 @@ def submit_record_form():
         return jsonify({"msg": 1})
     else:
         return jsonify({"msg": 0})
+
+
+@app.route('/show_blocks', methods=['GET'])
+def show_blocks():
+    # declare pSQL object
+    db = pSQL.pSQL()
+    # call the function and get the result
+    reslist = db.blocks_info()
+    # close the pSQL object
+    db.close()
+    # return it to the frontend\
+    return json.dumps(reslist, default=func.date_to_string_converter)
 
 
 # run(這一段要放在程式最後面，不然可能頁面出不來)

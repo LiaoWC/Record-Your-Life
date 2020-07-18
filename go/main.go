@@ -14,7 +14,13 @@ const (
 	dbname   = "smallfish"
 )
 
-const SqlStr string = `create table test( ID SERIAL PRIMARY KEY , name TEXT not null);`
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+const SqlStr string = `SELECT * FROM blocks;`
 
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
@@ -26,19 +32,22 @@ func main() {
 		panic(err)
 	}
 
-
 	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Exec(SqlStr)
+	var aaa sql.Result
+	aaa, err = db.Exec(SqlStr)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Successfully!")
-
+	fmt.Println(aaa.RowsAffected())
+	fmt.Println(aaa.LastInsertId())
 
 	defer db.Close()
+
+	//checkErr
 }

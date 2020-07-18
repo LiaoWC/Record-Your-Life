@@ -25,3 +25,7 @@ CREATE TABLE tag_classes(
 要給使用者填的是：
 title, tags, description, date
 ● 在旁邊顯示已有的tag，使用考能直接選
+
+
+找block的tags:
+SELECT tags.name FROM tags,tag_block_pairs tbp WHERE tbp.block_id = %s and tags.id = tbp.tag_id;

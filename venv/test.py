@@ -1,6 +1,10 @@
 import pSQL
 
 db = pSQL.pSQL()
-db.cur.execute("SELECT * FROM blocks;")
-print(db.cur.fetchone())
-print(db.cur.fetchall())
+
+reList = db.blocks_info()
+for item in reList:
+    print(item[2])
+    print(item)
+
+db.close()

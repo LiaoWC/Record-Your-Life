@@ -106,3 +106,30 @@ class pSQL:
         self.conn.commit()
         blockTagPairList = self.cur.fetchall()
         return tagsList, blocksList, blockTagPairList
+
+    # show blocks info, integrated with tags
+    # return: a list containing lists
+    # every internal list is one block, containing:
+    # [ Title(str) , description(str) , date(str), tags(list of strings) ]
+    def blocks_info(self):
+        sql = "SELECT id,title,description,last_edited_date FROM blocks;"
+        self.cur.execute(sql)
+        self.conn.commit()
+        blocks_list = self.cur.fetchall()
+        outer_list = []
+        for row_of_blocks in blocks_list:
+            # place title, description, date in the internal_list
+            internal_list = [row_of_blocks[1], row_of_blocks[2], row_of_blocks[3]]
+            block_id = row_of_blocks[0]
+            # finding tags and place it in the list
+            sql = "SELECT tags.name FROM tags,tag_block_pairs tbp WHERE tbp.block_id = %s and tags.id = tbp.tag_id;" % block_id
+            self.cur.execute(sql)
+            self.conn.commit()
+            tags_list_from_query = self.cur.fetchall()
+            tag_list = []
+            for row in tags_list_from_query:
+                tag_list.append(row[0])
+            internal_list.append(tag_list)
+            # put it in the outer_list
+            outer_list.append(internal_list)
+        return outer_list

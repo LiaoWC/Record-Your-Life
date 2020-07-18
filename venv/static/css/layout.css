@@ -87,19 +87,36 @@ div#record_form_btn_container {
 
 
 div#record_form_btn_container button {
-    position: absolute;
-    left: 50%;
-    /*top:50%;*/
-    /*transform: translate(-50% -50%);*/
-    transform: translate(-50%);
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*!*top:50%;*!*/
+    /*!*transform: translate(-50% -50%);*!*/
+    /*transform: translate(-50%);*/
 }
 
-section#submit_inform {
+section#submit_inform_msg {
     display: none;
 }
 
-section#submit_inform .alert {
+section#submit_inform_msg .alert {
     /*background-color: #d4edda;*/
     /*border-color: #c3e6cb;*/
 
+}
+
+section#show_blocks_section .blocks_info_tags {
+    color: black;
+}
+
+section#show_blocks_section .blocks_info_tags_signs {
+    color: #007bff
+}
+
+div#show_blocks_btn_container {
+    padding-bottom: 20px;
+}
+
+section#show_blocks_section {
+    padding-top: 15px;
+    padding-bottom: 20px;
 }

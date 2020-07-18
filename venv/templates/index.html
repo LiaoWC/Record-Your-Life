@@ -79,7 +79,6 @@
         <!--        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
     </div>
 </section>
-
 <section id="record_form">
     <div class="container">
         <form id="record_form_form" onsubmit="return false">
@@ -107,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container row" id="record_form_btn_container">
+            <div class="container text-center" id="record_form_btn_container">
                 <button type="submit" name="submit" class="btn btn-outline-secondary" id="record_form_btn">Record
                 </button>
             </div>
@@ -115,15 +114,25 @@
 
     </div>
 </section>
-
-<section id="submit_inform">
-    <div class="container">
+<section id="submit_inform_msg">
+    <div class="container" id="show_block_container">
         <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
             <div id="submit_form_msg">
             </div>
             <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
+        </div>
+    </div>
+</section>
+
+<section id="show_blocks_section">
+    <div class="container">
+        <div class="container text-center" id="show_blocks_btn_container">
+            <button type="button" class="btn btn-light" id="btn_show_blocks">Show/Renew blocks</button>
+        </div>
+        <div class="container">
+            <div class="accordion" id="show_blocks_section_accordion"></div>
         </div>
     </div>
 </section>
@@ -193,6 +202,7 @@
         </div>
     </div>
 </section>
+
 
 <!--<input type="text"/>-->
 <!--<script>-->
