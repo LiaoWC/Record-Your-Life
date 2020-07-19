@@ -57,6 +57,18 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_Edit" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Edit
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown_Edit">
+                            <a class="dropdown-item" href="#">Edit Blocks</a>
+                            <a class="dropdown-item" href="#">Edit Tags</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
@@ -79,9 +91,9 @@
         <!--        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
     </div>
 </section>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-xl-3">
             <section id="show_blocks_section">
                 <div class="container">
                     <div>
@@ -103,7 +115,7 @@
                 </div>
             </section>
         </div>
-        <div class="col-lg-7">
+        <div class="col-xl-6">
             <h4 class="text-center">Record your life!</h4>
             <section id="record_form">
                 <div class="container">
@@ -113,7 +125,6 @@
                             <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?"
                                    required="required">
                         </div>
-
                         <div class="form-group">
                             <label for="descriptionOfBlock">Description</label>
                             <textarea class="form-control" id="descriptionOfBlock" rows="3"></textarea>
@@ -152,6 +163,27 @@
                     </div>
                 </div>
             </section>
+        </div>
+        <div class="col-xl-3">
+            <div class="container">
+                <h4 class="text-center">Tags</h4>
+            </div>
+            <div class="container  text-center" id="show_tags_btn_container">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-light btn-secondary" id="btn_show_tags">
+                        Show/Renew
+                    </button>
+                    <button type="button" class="btn btn-light btn-secondary" id="btn_hide_show_tags">Hide
+                    </button>
+                </div>
+            </div>
+            <div class="container border rounded" id="show_tags_container">
+                <div class="container" id="second_show_tags_container"></div>
+            </div>
+            <div class="text-center" id="btn_edit_tag_link_container">
+                <button type="button" class="btn btn-light">Edit Tags</button>
+            </div>
+
         </div>
     </div>
 </div>

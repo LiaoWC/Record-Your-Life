@@ -128,3 +128,16 @@ button.need_confirm_delete {
     background-color: white;
     color: #bd2130;
 }
+
+div#show_tags_btn_container {
+    margin-bottom: 15px;
+}
+
+div#btn_edit_tag_link_container {
+    margin-top: 15px;
+}
+
+div#second_show_tags_container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

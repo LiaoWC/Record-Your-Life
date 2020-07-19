@@ -111,7 +111,7 @@ class pSQL:
     # return: a list containing lists
     # every internal list is one block, containing:
     # [ id(int), Title(str), description(str), date(str), tags(list of strings) ]
-    def blocks_info(self):
+    def get_all_blocks(self):
         sql = "SELECT id,title,description,last_edited_date FROM blocks;"
         self.cur.execute(sql)
         self.conn.commit()
@@ -131,7 +131,7 @@ class pSQL:
                 tag_list.append(row[0])
             internal_list.append(tag_list)
             # put it in the outer_list
-            outer_list.append(internal_list)
+            outer_list.insert(0,internal_list)
         return outer_list
 
     def delete_block(self, block_id):
@@ -142,3 +142,10 @@ class pSQL:
         sql = "DELETE FROM blocks WHERE blocks.id = %s;" % block_id
         self.cur.execute(sql)
         self.conn.commit()
+
+    def get_all_tags(self):
+        sql = "SELECT id,name FROM tags;"
+        self.cur.execute(sql)
+        self.conn.commit()
+        resList = self.cur.fetchall()
+        return resList

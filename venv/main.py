@@ -63,10 +63,10 @@ def show_blocks():
     # declare pSQL object
     db = pSQL.pSQL()
     # call the function and get the result
-    reslist = db.blocks_info()
+    reslist = db.get_all_blocks()
     # close the pSQL object
     db.close()
-    # return it to the frontend\
+    # return it to the frontend
     return json.dumps(reslist, default=func.date_to_string_converter)
     # P.S. id will be inserted into the delete-block-btn tags as a title attr
 
@@ -78,6 +78,14 @@ def delete_block():
         db = pSQL.pSQL()
         db.delete_block(block_id)
         return jsonify({"msg": 1})
+
+@app.route('/get_tags',methods=['GET'])
+def get_tags():
+    db = pSQL.pSQL()
+    reslist = db.get_all_tags()
+    db.close()
+    return json.dumps(reslist)
+
 
 
 # run(這一段要放在程式最後面，不然可能頁面出不來)
