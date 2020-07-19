@@ -79,71 +79,83 @@
         <!--        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
     </div>
 </section>
-<section id="record_form">
-    <div class="container">
-        <form id="record_form_form" onsubmit="return false">
-            <div class="form-group">
-                <label for="nameOfBlock">Title</label>
-                <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?"
-                       required="required">
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <section id="show_blocks_section">
+                <div class="container">
+                    <div>
+                        <div class="container  text-center" id="show_blocks_btn_container">
+                            <h4 class="text-center">Show/Hide All Blocks</h4>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-light btn-secondary" id="btn_show_blocks">
+                                    Show/Renew
+                                </button>
+                                <button type="button" class="btn btn-light btn-secondary" id="btn_remove_blocks">Hide
+                                </button>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="descriptionOfBlock">Description</label>
-                <textarea class="form-control" id="descriptionOfBlock" rows="3"></textarea>
-            </div>
-            <div class="row" id="date_and_tags_and_calendar">
-                <div class="col-md-12" id="tags_and_date">
-                    <div class="form-group  ">
-                        <label for="tagsOfBlock">Tags(must not type ",")</label>
-                        <select multiple data-role="tagsinput" id="tagsOfBlock" class="form-control">
-                        </select>
                     </div>
-                    <div class="form-group ">
-                        <label for="nameOfBlock">Date</label>
-                        <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--"
-                               required="required">
+                    <div class="container">
+                        <div class="accordion" id="show_blocks_section_accordion"></div>
                     </div>
                 </div>
-            </div>
-            <div class="container text-center" id="record_form_btn_container">
-                <button type="submit" name="submit" class="btn btn-outline-secondary" id="record_form_btn">Record
-                </button>
-            </div>
-        </form>
+            </section>
+        </div>
+        <div class="col-lg-7">
+            <h4 class="text-center">Record your life!</h4>
+            <section id="record_form">
+                <div class="container">
+                    <form id="record_form_form" onsubmit="return false">
+                        <div class="form-group">
+                            <label for="nameOfBlock">Title</label>
+                            <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?"
+                                   required="required">
+                        </div>
 
-    </div>
-</section>
-<section id="submit_inform_msg">
-    <div class="container" id="show_block_container">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
-            <div id="submit_form_msg">
-            </div>
-            <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                        <div class="form-group">
+                            <label for="descriptionOfBlock">Description</label>
+                            <textarea class="form-control" id="descriptionOfBlock" rows="3"></textarea>
+                        </div>
+                        <div class="row" id="date_and_tags_and_calendar">
+                            <div class="col-md-12" id="tags_and_date">
+                                <div class="form-group  ">
+                                    <label for="tagsOfBlock">Tags(must not type ",")</label>
+                                    <select multiple data-role="tagsinput" id="tagsOfBlock" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="nameOfBlock">Date</label>
+                                    <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--"
+                                           required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" id="record_form_btn_container">
+                            <button type="submit" name="submit" class="btn btn-outline-secondary" id="record_form_btn">
+                                Record
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+            <section id="submit_inform_msg">
+                <div class="container" id="show_block_container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
+                        <div id="submit_form_msg">
+                        </div>
+                        <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-</section>
+</div>
 
-<section id="show_blocks_section">
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="container col-md-6 text-center" id="show_blocks_btn_container">
-                    <button type="button" class="btn btn-light" id="btn_show_blocks">Show/Renew the List of All Blocks
-                    </button>
-                </div>
-                <div class="container text-center col-md-6" id="remove_blocks_btn_container">
-                    <button type="button" class="btn btn-light" id="btn_remove_blocks">Hide</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="accordion" id="show_blocks_section_accordion"></div>
-            </div>
-        </div>
-    </div>
-</section>
 <section id="display_tables">
     <div class="container text-center" id="show_tables_btn_container">
         <button type="button" class="btn btn-light" id="btn_show_tables">Show/Remove Showing Tables</button>
@@ -216,22 +228,6 @@
         </div>
     </div>
 </section>
-<div class="container">
-    <div class="toast" style="position: absolute; bottom: 5vh; right: 5vw;" role="alert" aria-live="assertive"
-         aria-atomic="true" data-delay="3000">
-        <div class="toast-header">
-            <img src="#" class="rounded mr-2" alt="#">
-            <strong class="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
 
 <!--<input type="text"/>-->
 <!--<script>-->
