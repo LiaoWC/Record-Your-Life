@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/edit_tags.css')}}">
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<!--<script src="{{url_for('static', filename='js/block_form.js')}}"></script>-->
+<script src="{{url_for('static', filename='js/edit_tags.js')}}"></script>
+{% endblock %}
+
+{% block jumbotron_header %}
+Edit your tags!
+{% endblock %}
+
+{% block jumbotron_p %}
+This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+featured content or information.
+{% endblock %}
+
+{% block center %}
+<div class="container-xl">
+    <div class="container">
+        <div class="row" id="search_tags_form">
+            <form class="col-md-12">
+                <div class="form-group">
+                    <label for="searchingTagsInput">Search tags</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="searchingTagsInput"
+                                   aria-describedby="emailHelp">
+                        </div>
+<!--                        <div class="col-md-1">-->
+<!--                            <button type="submit" class="btn btn-primary">Search</button>-->
+<!--                        </div>-->
+                    </div>
+                    <small class="form-text text-muted">Search your tags using a keyword.</small>
+                </div>
+            </form>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" id="btn_tags_adding">Add</button>
+                <button type="button" class="btn btn-secondary">Rename</button>
+                <button type="button" class="btn btn-secondary">Delete</button>
+            </div>
+        </div>
+        <div class="row" id="add_tags_form">
+            <form class="col-xl-12" id="add_tags_form_form">
+                <div class="form-group">
+                    <label for="addingTagsInput">Add tags</label>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <input type="email" class="form-control"
+                                   aria-describedby="emailHelp" id="addingTagsInput">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">Add tags here. Tags help you organize your
+                        record.</small>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-xl-12" id="show_search_tags_col">
+        <div class="container">
+            <h4 class="text-center">Tags</h4>
+        </div>
+        <div class="container border rounded" id="show_search_tags_container">
+            <div class="container" id="second_show_tags_container" ></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

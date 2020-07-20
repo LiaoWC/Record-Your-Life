@@ -79,14 +79,32 @@ def delete_block():
         db.delete_block(block_id)
         return jsonify({"msg": 1})
 
-@app.route('/get_tags',methods=['GET'])
+
+@app.route('/get_tags', methods=['GET'])
 def get_tags():
+    keyword = request.values['Keyword']
     db = pSQL.pSQL()
-    reslist = db.get_all_tags()
+    reslist = db.get_all_tags(keyword)
     db.close()
     return json.dumps(reslist)
 
 
+@app.route('/edit_tags')
+def edit_tags():
+    return render_template('edit_tags.html')
+
+@app.route('/register_page')
+def register_page():
+    return render_template('account/register_page.html')
+
+@app.route('/register_submit', methods=['POST'])
+def register_submit():
+    name=request.values['username']
+    email = request.values['email']
+    password = request.values['password']
+    db = pSQL.pSQL()
+    db.register(name,email,password)
+    return jsonify({"msg":1})
 
 # run(這一段要放在程式最後面，不然可能頁面出不來)
 if __name__ == '__main__':

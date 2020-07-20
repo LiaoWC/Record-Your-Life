@@ -2,12 +2,13 @@ CREATE TABLE blocks(
     id BIGSERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
-    last_edited_date DATE
+    last_edited_date DATE,
+    user_id INT NOT NULL
 );
 
 CREATE TABLE tags(
-    id BIGSERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    id BIGSERIAL  PRIMARY KEY,
+    name TEXT  NOT NULL UNIQUE
 );
 
 CREATE TABLE tag_block_pairs(
@@ -22,10 +23,17 @@ CREATE TABLE tag_classes(
     child_tag_id INT NOT NULL
 );
 
+CREATE TABLE users(
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+
 要給使用者填的是：
 title, tags, description, date
 ● 在旁邊顯示已有的tag，使用考能直接選
 
 
 找block的tags:
-SELECT tags.name FROM tags,tag_block_pairs tbp WHERE tbp.block_id = %s and tags.id = tbp.tag_id;
+SELECT tags.n   ame FROM tags,tag_block_pairs tbp WHERE tbp.block_id = %s and tags.id = tbp.tag_id;

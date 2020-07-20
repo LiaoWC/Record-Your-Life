@@ -131,7 +131,7 @@ class pSQL:
                 tag_list.append(row[0])
             internal_list.append(tag_list)
             # put it in the outer_list
-            outer_list.insert(0,internal_list)
+            outer_list.insert(0, internal_list)
         return outer_list
 
     def delete_block(self, block_id):
@@ -143,9 +143,17 @@ class pSQL:
         self.cur.execute(sql)
         self.conn.commit()
 
-    def get_all_tags(self):
-        sql = "SELECT id,name FROM tags;"
+    def get_all_tags(self, keyword):
+        sql = "SELECT id,name FROM tags WHERE name like '%%%s%%' ORDER BY name;" % keyword
         self.cur.execute(sql)
         self.conn.commit()
         resList = self.cur.fetchall()
         return resList
+
+    def register(self,name,email,password):
+        print(name,email,password)
+        return
+    ######### not finished ######
+
+    def add_a_tags(self,tag_name):
+        sql = "INSERT INTO tags(name"

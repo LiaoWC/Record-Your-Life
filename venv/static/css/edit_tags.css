@@ -1,0 +1,39 @@
+/* Hide tags-adding initially */
+div#add_tags_form {
+    display: none;
+}
+
+div#show_search_tags_col{
+    margin-top: 20px;
+}
+
+div#show_search_tags_container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 5em;
+}
+
+.search_tags_class{
+    font-size: large;
+    line-height: 2em;
+    background-color: wheat;
+    border-color: dimgray;
+    border-left-style: solid;
+    border-width: 30px;
+}
+
+.search_tags_class:hover{
+    background-color: lightgoldenrodyellow;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-right-width: 30px;
+    border-top-width: 8px;
+    border-bottom-width: 8px;
+    border-color: black;
+}
+#show_search_tags_container .badge-light:focus,#show_search_tags_container a.badge-light:hover{
+    background-color: black;
+    border-color: black;
+    color: white;
+}
