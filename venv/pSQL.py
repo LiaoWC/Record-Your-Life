@@ -144,16 +144,43 @@ class pSQL:
         self.conn.commit()
 
     def get_all_tags(self, keyword):
+        keyword = solve_apostrophe(keyword)
         sql = "SELECT id,name FROM tags WHERE name like '%%%s%%' ORDER BY name;" % keyword
         self.cur.execute(sql)
         self.conn.commit()
         resList = self.cur.fetchall()
         return resList
 
-    def register(self,name,email,password):
-        print(name,email,password)
+    # return if the username exists in the database, table users
+    def if_username_exists(self, username):
+        username = solve_apostrophe(username)
+        sql = "SELECT * FROM users WHERE name = '%s'" % username
+        self.cur.execute(sql)
+        self.conn.commit()
+        resList = self.cur.fetchall()
+        return False if len(resList) is 0 else True
+
+    # return if the username and password exist and match
+    def if_username_password_exist_match(self, username, password):
+        # check if the username exists first
+        if not self.if_username_exists(username):
+            return False
+        # check if matching
+        sql = "SELECT * FROM users WHERE name = '%s' and password = '%s';" % (
+            solve_apostrophe(username), solve_apostrophe(password))
+        self.cur.execute(sql)
+        self.conn.commit()
+        resList = self.cur.fetchall()
+        return False if len(resList) is 0 else True
+
+    def register(self, name, email, password):
+        sql = "INSERT INTO users (name,email,password) VALUES ('%s','%s','%s');" \
+              % (solve_apostrophe(name), solve_apostrophe(email), solve_apostrophe(password))
+        self.cur.execute(sql)
+        self.conn.commit()
         return
+
     ######### not finished ######
 
-    def add_a_tags(self,tag_name):
+    def add_a_tags(self, tag_name):
         sql = "INSERT INTO tags(name"

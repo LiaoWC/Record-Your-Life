@@ -1,2 +1,7 @@
 .idea
 __pycache__
+venv/bin
+venv/doc
+venv/include
+venv/lib
+venv/lib64

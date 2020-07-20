@@ -1,6 +1,8 @@
 import datetime
 
 def solve_apostrophe(old_str):
+    if not old_str:
+        return ""
     newStr = ""
     for i in old_str:
         if i == "'":

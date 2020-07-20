@@ -1,186 +1,69 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<script src="{{url_for('static', filename='js/block_form.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<!--<script src="{{url_for('static', filename='js/register_page.js')}}"></script>-->
 {% endblock %}
 
-{% block jumbotron_header %}
-Trace back your progress!
-{% endblock %}
-
-{% block jumbotron_p %}
-This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-featured content or information.
-{% endblock %}
 
 {% block center %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-3">
-            <section id="show_blocks_section">
-                <div class="container">
-                    <div>
-                        <div class="container  text-center" id="show_blocks_btn_container">
-                            <h4 class="text-center">Show/Hide All Blocks</h4>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-light btn-secondary" id="btn_show_blocks">
-                                    Show/Renew
-                                </button>
-                                <button type="button" class="btn btn-light btn-secondary" id="btn_remove_blocks">Hide
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="container">
-                        <div class="accordion" id="show_blocks_section_accordion"></div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-xl-6">
-            <h4 class="text-center">Record your life!</h4>
-            <section id="record_form">
-                <div class="container">
-                    <form id="record_form_form" onsubmit="return false">
-                        <div class="form-group">
-                            <label for="nameOfBlock">Title</label>
-                            <input type="text" class="form-control" id="nameOfBlock" placeholder="What did you do?"
-                                   required="required">
-                        </div>
-                        <div class="form-group">
-                            <label for="descriptionOfBlock">Description</label>
-                            <textarea class="form-control" id="descriptionOfBlock" rows="3"></textarea>
-                        </div>
-                        <div class="row" id="date_and_tags_and_calendar">
-                            <div class="col-md-12" id="tags_and_date">
-                                <div class="form-group  ">
-                                    <label for="tagsOfBlock">Tags(must not type ",")</label>
-                                    <select multiple data-role="tagsinput" id="tagsOfBlock" class="form-control">
-                                    </select>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="nameOfBlock">Date</label>
-                                    <input type="date" class="form-control" id="dateOfBlock" placeholder="2020/--/--"
-                                           required="required">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container text-center" id="record_form_btn_container">
-                            <button type="submit" name="submit" class="btn btn-outline-secondary" id="record_form_btn">
-                                Record
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
-            </section>
-            <section id="submit_inform_msg">
-                <div class="container" id="show_block_container">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="submit_inform_tmpl">
-                        <div id="submit_form_msg">
-                        </div>
-                        <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-xl-3">
-            <div class="container">
-                <h4 class="text-center">Tags</h4>
-            </div>
-            <div class="container  text-center" id="show_tags_btn_container">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-light btn-secondary" id="btn_show_tags">
-                        Show/Renew
-                    </button>
-                    <button type="button" class="btn btn-light btn-secondary" id="btn_hide_show_tags">Hide
-                    </button>
-                </div>
-            </div>
-            <div class="container border rounded" id="show_tags_container">
-                <div class="container" id="second_show_tags_container"></div>
-            </div>
-            <div class="text-center" id="btn_edit_tag_link_container">
-                <button type="button" class="btn btn-light" onclick="window.location.href='/edit_tags'">Edit Tags
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<section id="display_tables">
-    <div class="container text-center" id="show_tables_btn_container">
-        <button type="button" class="btn btn-light" id="btn_show_tables">Show/Remove Showing Tables</button>
-    </div>
-    <div class="container" id="showing_table_headerAndTables_container">
-        <h1 class="text-center">Showing Three Tables in the Database</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for row in tagRows: %}
-                        <tr>
-                            <th scope="row">{{row[0]}}</th>
-                            <td>{{row[1]}}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-8">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">title</th>
-                            <th scope="col">description</th>
-                            <th scope="col">last_edited</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for row in blockRows: %}
-                        <tr>
-                            <th scope="row">{{row[0]}}</th>
-                            <td>{{row[1]}}</td>
-                            <td>{{row[2]}}</td>
-                            <td>{{row[3]}}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="container">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">block_id</th>
-                        <th scope="col">tag_id</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for row in blockTagPairRows: %}
-                    <tr>
-                        <th scope="row">{{row[0]}}</th>
-                        <td>{{row[1]}}</td>
-                        <td>{{row[2]}}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+<!-- picture source: https://www.needpix.com/photo/download/786443/background-black-abstract-black-and-white-light-pattern-black-white-black-background-structure-->
+<section id='home_intro'>
+    <div class="jumbotron row" style='background-image: url("/static/img/background-1808894_1280.jpg");'>
+        <div class="align-self-lg-center">
+            <h1 class="display-4">Let's Record Our Life!
+            </h1>
+            <p class="lead text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra
+                attention
+                to
+                featured content or information. This is a simple hero unit, a simple jumbotron-style component for
+                calling extra attention to
+                featured content or information or information or information or information or information or
+                information or information.</p>
+            <!--            <hr class="my-4 text-center">-->
+            <p class="text-center">It uses utility classes for typography and spacing to space content out within the
+                larger container.</p>
+            <div class="text-center">
+                <a class="btn btn-primary btn-lg" href="/record_my_life" role="button">Record Now</a>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    section#home_intro, #home_intro .jumbotron, html {
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+
+    #home_intro .jumbotron {
+        color: aliceblue;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #home_intro a {
+        background-color: transparent;
+        border-color: aliceblue;
+    }
+
+    #home_intro a:hover {
+        background-color: aliceblue;
+        color: black;
+        border-color: black;
+        border-width: 0;
+    }
+</style>
+<script>
+    $("h1,p").addClass("text-center")
+    $("#intro .jumbotron").addClass("align-top")
+    // $.getJSON('/get_home_page_background_image', function (data) {
+    //     console.log(data)
+    //     console.log(typeof data)
+    //     $("#home_intro.jumbotron").css(`background-image: ${data['image_url']};
+    //     background-size: cover;`)
+    //     alert ("kkj")
+    // })
+</script>
 {% endblock %}

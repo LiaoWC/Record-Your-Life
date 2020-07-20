@@ -15,6 +15,7 @@ featured content or information.
 {% endblock %}
 
 {% block center %}
+{{super()}}
 <div class="container-sm">
     <div class="row justify-content-sm-center">
         <div class="col-md-6">
@@ -86,7 +87,7 @@ featured content or information.
             let email = $("#registerInputEmail1").val()
             let password = $("#registerPasswordFirstInput").val()
 
-            $.post('/register_submit', {
+            $.post('/register', {
                 "username": username,
                 "email": email,
                 "password": password

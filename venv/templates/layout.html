@@ -40,7 +40,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/record_my_life">Record<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_Account" role="button"
@@ -48,8 +54,7 @@
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown_Account">
-                            <a class="dropdown-item" href="/register_page">Register</a>
-                            <a class="dropdown-item" href="/login_page">Login</a>
+                            <a class="dropdown-item" href="/login">Login</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a>
@@ -79,6 +84,8 @@
         </nav>
     </div>
 </header>
+
+{% block center %}
 <section id='intro'>
     <div class="jumbotron">
         <h1 class="display-4">{% block jumbotron_header %}{% endblock %}</h1>
@@ -88,8 +95,7 @@
         <!--                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
     </div>
 </section>
-
-{% block center %}{% endblock %}
+{% endblock %}
 
 
 </body>
