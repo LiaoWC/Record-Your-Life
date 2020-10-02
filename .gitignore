@@ -1,6 +1,4 @@
-.idea
+.idea/
+.vscode/
 __pycache__
-venv/bin
-venv/include
-venv/lib
-venv/lib64
+venv/

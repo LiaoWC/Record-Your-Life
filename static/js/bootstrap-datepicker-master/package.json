@@ -7,7 +7,7 @@
     "datepicker",
     "bootstrap"
   ],
-  "main": "./dist/js/bootstrap-datepicker.js",
+  "main": "dist/js/bootstrap-datepicker.js",
   "files": [
     "build",
     "dist",
@@ -19,7 +19,7 @@
   "author": "Andrew Rowls <eternicode@gmail.com>",
   "scripts": {
     "test": "grunt test",
-    "screenshots": "node ./docs/screenshots.js"
+    "screenshots": "node docs/screenshots.js"
   },
   "repository": {
     "type": "git",
