@@ -1,3 +1,6 @@
+# https://www.maxlist.xyz/2019/11/10/flask-sqlalchemy-setting/
+
+
 # 正式使用時，記得把debug模式改成False
 ifDebugMode = True
 
