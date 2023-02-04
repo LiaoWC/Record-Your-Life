@@ -1,5 +1,5 @@
 # https://www.maxlist.xyz/2019/11/10/flask-sqlalchemy-setting/
-
+# https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 # 正式使用時，記得把debug模式改成False
 ifDebugMode = True
@@ -10,10 +10,16 @@ from flask import Flask, render_template, request, redirect, session, jsonify, f
 # http的exception用
 # from werkzeug.exceptions import HTTPException
 
+
+from flask_sqlalchemy import SQLAlchemy
+# db =SQLAlchemy()
+
 import json
 import datetime
 import pSQL, func
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+
+
 
 #
 # db = psycopg2.connect(connect_str)
@@ -29,6 +35,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 # print(kkk)
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///"
 app.secret_key = "lka#jffFJK354LSJF"
 
 ########### login-related #################

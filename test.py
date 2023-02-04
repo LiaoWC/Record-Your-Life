@@ -1,23 +1,4 @@
-import pSQL
-
-db = pSQL.pSQL()
-
-
-
-
-
-
-username = "jj"
-password = "jjj"
-
-print(db.if_username_password_exist_match(username,password))
-
-
-
-
-
-
-
-db.close()
-
-
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+d = os.path.join(basedir,'func.py')
+print(d)
